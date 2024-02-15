@@ -21,18 +21,6 @@ func find(n: Int) -> Bool {
     return true
 }
 
-
-func separate(_ n : Int) -> [Int] {
-    var numbers = [Int]()
-    var i = s
-    while i != 1 {
-        numbers.append(n / i)
-        i /= 10
-    }
-    numbers.append(n)
-    return numbers
-}
-
 var sel = [Int]()
 var firstNum = [Int]()
 func firstCheck(idx: Int) {
@@ -61,14 +49,4 @@ func firstCheck(idx: Int) {
 }
 
 firstCheck(idx: 0)
-for i in firstNum {
-    let s = separate(i)
-    var flag = true
-    for j in s {
-        if !find(n: j) {
-            flag = false
-        }
-    }
-    if flag == true { result.append(i) }
-}
-print(result.map { String($0) }.joined(separator: "\n"))
+print(firstNum.map { String($0) }.joined(separator: "\n"))
