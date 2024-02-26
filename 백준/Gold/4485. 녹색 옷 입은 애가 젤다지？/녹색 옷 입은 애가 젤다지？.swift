@@ -1,3 +1,4 @@
+
 struct Heap<T> {
     private var array = [T]()
     private let compare: (T, T) -> Bool
@@ -13,13 +14,13 @@ struct Heap<T> {
         var childIndex = array.count - 1
         var parentIndex = (childIndex - 1) / 2
         
-        while childIndex > 0 && compare(array[childIndex], array[parentIndex]) {
+        while childIndex > 0 && compare(array[parentIndex], array[childIndex]) {
             array.swapAt(childIndex, parentIndex)
             childIndex = parentIndex
             parentIndex = (childIndex - 1) / 2
         }
     }
-
+    
     mutating func deheap() -> T? {
         if array.isEmpty {
             return nil
@@ -57,7 +58,6 @@ struct Heap<T> {
         array.isEmpty
     }
 }
-
 var result = [Int]()
 let dx = [0, 1, 0, -1]
 let dy = [1, 0, -1, 0]
@@ -78,10 +78,15 @@ while true {
     
     while !heap.isEmpty {
         let info = heap.deheap()!
+        
+        if info.vertex.x == n-1 && info.vertex.y == n-1 {
+            break
+        }
+        
         if info.weight > record[info.vertex.y][info.vertex.x] {
             continue
         }
-
+        
         for i in 0..<4 {
             let newx = info.vertex.x + dx[i]
             let newy = info.vertex.y + dy[i]
