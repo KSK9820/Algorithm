@@ -21,7 +21,6 @@ func union(_ a: Int, _ b: Int) {
     let aP = find(a)
     let bP = find(b)
 
-    if aP == bP { return }
     dot[max(aP,bP)] = min(aP,bP)
 }
 
