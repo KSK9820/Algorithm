@@ -48,16 +48,6 @@ struct Heap<T> {
         }
         return value
     }
-    
-    var front: T? {
-        if array.isEmpty {
-            return nil
-        }
-        return array.first
-    }
-    var isEmpty: Bool {
-        array.isEmpty
-    }
 }
 
 let nm = readLine()!.split(separator: " ").map { Int($0)! }
@@ -78,16 +68,18 @@ for i in 0..<m {
 }
 while hour > 0  {
     guard let h = heap.deheap() else { break }
-    
-    if h.n < h.w {
-        heap.enheap((h.n, h.n))
+
+    let time = h.n / h.w
+    if hour > time {
+        if h.n % h.w > 0 {
+            heap.enheap((h.n % h.w, h.n % h.w))
+        }
+        hour -= time
+        result += time * h.w
     } else {
-        
-        heap.enheap((h.n - h.w, h.w))
-        hour -= 1
-        result += h.w
-        
+        result += hour * h.w
+        hour = 0
+        break
     }
-    
 }
 print(result)
