@@ -1,6 +1,7 @@
 let t = Int(readLine()!)!
 typealias Edge = (s: Int, d: Int, w: Int)
 var parents = [Int]()
+var result = [Int]()
 
 for _ in 0..<t {
     let rc = readLine()!.split(separator: " ").map { Int($0)! }
@@ -12,18 +13,17 @@ for _ in 0..<t {
         let input = readLine()!.split(separator: " ").map { Int($0)! }
         for j in 0..<c-1 {
             network.append((i*c+j, i*c+j+1, input[j]))
-            network.append((i*c+j+1, i*c+j, input[j]))
         }
     }
     for i in 0..<r-1 {
         let input = readLine()!.split(separator: " ").map { Int($0)! }
         for j in 0..<c {
             network.append((i*c+j, i*c+j+c, input[j]))
-            network.append((i*c+j+c, i*c+j, input[j]))
         }
     }
-    print(kruskal(edge: network).reduce(0) { $0 + $1.w })
+    result.append(kruskal(edge: network).reduce(0) { $0 + $1.w })
 }
+print(result.map { String($0)}.joined(separator: "\n") )
 func union(_ a: Int, _ b: Int) {
     let ap = find(a)
     let bp = find(b)
