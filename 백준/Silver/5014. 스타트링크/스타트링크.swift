@@ -22,8 +22,13 @@ else {
             if visited[now.u * u - now.d * d + s] { continue }
             visited[now.u * u - now.d * d + s] = true
             
-            q.enqueue((now.u+1, now.d))
-            q.enqueue((now.u, now.d + 1))
+            if (now.u + 1) * u - (now.d) * d + s <= f && !visited[(now.u + 1) * u - (now.d) * d + s] {
+                q.enqueue((now.u+1, now.d))
+            }
+            
+            if (now.u) * u - (now.d+1) * d + s > 0 && !visited[(now.u) * u - (now.d + 1) * d + s] {
+                q.enqueue((now.u, now.d + 1))
+            }
         }
     }
 }
