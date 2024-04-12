@@ -5,12 +5,7 @@ var result = ""
 for _ in 0..<t {
     let p = Array(readLine()!)
     let n = Int(readLine()!)!
-    let arr = readLine()!.trimmingCharacters(in: CharacterSet(charactersIn: "[]")).split(separator: ",").map { Int($0)! }
-    
-    if p.filter { $0 == "D" }.count > n {
-        result.append("error\n")
-        continue
-    }
+    let arr = readLine()!.trimmingCharacters(in: CharacterSet(charactersIn: "[]")).split(separator: ",")
     
     var startIndex = 0
     var lastIndex = n
@@ -22,22 +17,27 @@ for _ in 0..<t {
             continue
         }
         if op == "D" {
+           
             if direction {
                 startIndex += 1
             } else {
                 lastIndex -= 1
             }
+        } 
+        if startIndex > lastIndex {
+            result.append("error\n")
+            break
         }
     }
     
     if startIndex < lastIndex {
         var newArr = ""
         if direction {
-            newArr = "\(arr[startIndex..<lastIndex])".replacingOccurrences(of: ", ", with: ",")
+            newArr = arr[startIndex..<lastIndex].joined(separator: ",")
         } else {
-            newArr = "\(Array(arr[startIndex..<lastIndex].reversed()))".replacingOccurrences(of: ", ", with: ",")
+            newArr = Array(arr[startIndex..<lastIndex].reversed()).joined(separator: ",")
         }
-        result.append(newArr + "\n")
+        result.append("[" + newArr + "]" + "\n")
     } else if startIndex == lastIndex {
         result.append("[]\n")
     }
