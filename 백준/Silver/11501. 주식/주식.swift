@@ -3,13 +3,12 @@ var answer = [String]()
 for _ in 0..<t {
     let n = Int(readLine()!)!
     let price = readLine()!.split(separator: " ").map { Int($0)! }
-    var sortedPrice = price.sorted(by: <)
     
     var result = 0
     var count = 0
     var tempPrice = 0
     var high = price[n-1]
-
+   
     for i in (0..<n-1).reversed() {
         if high > price[i] {
             count += 1
@@ -27,3 +26,4 @@ for _ in 0..<t {
     answer.append(String(result))
 }
 print(answer.joined(separator: "\n"))
+
