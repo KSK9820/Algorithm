@@ -1,16 +1,10 @@
 let n = Int(readLine()!)!
 let a = readLine()!.split(separator: " ").map { Int($0)! }
-let o = readLine()!.split(separator: " ").map { Int($0)! }
+var o = readLine()!.split(separator: " ").map { Int($0)! }
 let operation = ["+", "-", "x", "/"]
 
-var t = [[String]]()
-for i in 0..<4 {
-    t.append(Array(repeating: operation[i], count: o[i]))
-}
 
-let op = t.flatMap { $0 }
 var selected = [String](repeating: "", count: n-1)
-var check = Array(repeating: false, count: n-1)
 var minResult = Int.max
 var maxResult = -Int.max
 var opSet = Set<[String]>()
@@ -21,13 +15,12 @@ func doCalculate(_ idx: Int) {
         return
     }
     
-    for i in 0..<n-1 {
-        if !check[i] {
-            check[i] = true
-            selected[idx] = op[i]
-            doCalculate(idx+1)
-            check[i] = false
-        }
+    for i in 0..<4 {
+        if o[i] == 0 { continue }
+        o[i] -= 1
+        selected[idx] = operation[i]
+        doCalculate(idx + 1)
+        o[i] += 1
     }
 }
 
