@@ -6,7 +6,8 @@ var selected = Array(repeating: "", count: l)
 var result = ""
 
 func backTracking(_ idx: Int, _ sidx: Int) {
-    if idx == l {
+    // selected
+    if sidx == l {
         let set = Set(selected)
         let vowel = set.intersection(Set(["a", "e", "i", "o", "u"])).count
         let consonent = l - vowel
@@ -17,14 +18,14 @@ func backTracking(_ idx: Int, _ sidx: Int) {
         return
     }
     
-    for i in sidx..<c {
-        if !visited[i] {
-            visited[i] = true
-            selected[idx] = alphabet[i]
-            backTracking(idx+1, i)
-            visited[i] = false
-        }
+    //alphabet
+    if idx == c {
+        return
     }
+    
+    selected[sidx] = alphabet[idx]
+    backTracking(idx+1, sidx+1)
+    backTracking(idx+1, sidx)
 }
 
 backTracking(0,0)
