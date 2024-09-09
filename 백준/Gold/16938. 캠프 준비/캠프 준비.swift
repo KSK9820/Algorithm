@@ -9,11 +9,8 @@ var result = 0
 func backTracking(idx: Int, lidx: Int) {
     if selected.count >= 2 {
         let hap = selected.reduce(0, +)
-        if hap >= l && hap <= r {
-            let temp  = selected.filter { $0 != 0 }
-            if temp.max()! - temp.min()! >= x {
-                result += 1
-            }
+        if hap >= l && hap <= r && selected.max()! - selected.min()! >= x{
+            result += 1
         }
     }
 
