@@ -2,7 +2,7 @@ import Foundation
 func getDistance(a: Star, b: Star) -> Double {
     let deltaX = b.x - a.x
     let deltaY = b.y - a.y
-    return sqrt(deltaX * deltaX + deltaY * deltaY)
+    return (deltaX * deltaX + deltaY * deltaY).squareRoot()
 }
 typealias Edge = (s: Int, d: Int, w: Double)
 typealias Star = (x: Double, y: Double)
@@ -51,4 +51,3 @@ func kruskal(edges: [Edge], numberOfVertice: Int) -> [Edge] {
 let mst = kruskal(edges: edges, numberOfVertice: n)
 let result = mst.reduce(0.0) { (result, star) in result + star.w }
 print(String(result).prefix(4))
-
