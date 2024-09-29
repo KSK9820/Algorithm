@@ -54,10 +54,22 @@ for y in 0..<n {
 }
 
 
+
+func isLand(y: Int, x: Int) -> Bool {
+    for i in 0..<4 {
+        let newy = y + my[i]
+        let newx = x + mx[i]
+        
+        if newy < 0 || newx < 0 || newy >= n || newx >= n { continue }
+        if map[newy][newx] == 0 { return true }
+    }
+    return false
+}
+
 var result = Int.max
 for y in 0..<n {
     for x in 0..<n {
-        if map[y][x] != 0 {
+        if map[y][x] != 0 && isLand(y: y, x: x) {
             var q = Queue<(y: Int, x: Int, c: Int)>()
             q.enqueue((y,x,0))
             
