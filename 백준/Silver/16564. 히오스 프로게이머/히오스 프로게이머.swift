@@ -8,7 +8,6 @@ for i in 0..<n {
 
 var left = x.min()!
 var right = x.max()! + k
-var result = 0
 
 while left <= right {
     let mid = (left + right) / 2
@@ -18,10 +17,9 @@ while left <= right {
     }
     
     if level <= k {
-        result = mid
         left = mid + 1
     } else {
         right = mid - 1
     }
 }
-print(result)
+print(right)
