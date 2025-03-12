@@ -64,6 +64,7 @@ func findFish() -> (y: Int, x: Int, d: Int)? {
     var fish = [(y: Int, x: Int)]()
     
     q.enqueue((shark.y, shark.x, 0))
+    visited[shark.y][shark.x] = true
     
     while true {
         guard let now = q.dequeue() else { break }
