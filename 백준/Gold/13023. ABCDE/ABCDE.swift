@@ -1,3 +1,4 @@
+
 let nm = readLine()!.split(separator: " ").map { Int($0)! }
 let (n,m) = (nm[0], nm[1])
 var f = [[Int]](repeating: [Int](), count: n)
@@ -15,12 +16,17 @@ func dfs(_ idx: Int, depth: Int) {
         result = 1
         return
     }
+    if result == 1 { return }
     
     for j in f[idx] {
         if v[j] { continue }
         v[j] = true
         friend[depth] = j
         dfs(j, depth: depth + 1)
+        if result == 1 {
+            v[j] = false
+            return
+        }
         v[j] = false
     }
 }
