@@ -45,8 +45,9 @@ for _ in 0..<Int(readLine()!)! {
     let (a,b) = (ab[0].map { Int(String($0))! } , ab[1].map { Int(String($0))! })
     
     var q = Queue<(n: [Int], c: Int)>()
-    var v = Array(repeating: Int.max, count: 10000)
+    var v = Array(repeating: false, count: 10000)
     q.enqueue((a, 0))
+    v[makeNum(a)] = true
     
     while true {
         guard let now = q.dequeue() else { result += "Impossible\n"; break }
@@ -59,9 +60,8 @@ for _ in 0..<Int(readLine()!)! {
                 new[i] = j
                 
                 let newnumber = makeNum(new)
-                if !prime[newnumber] { continue }
-                if v[newnumber] < now.c + 1 { continue }
-                v[newnumber] = now.c + 1
+                if !prime[newnumber] || v[newnumber] { continue }
+                v[newnumber] = true
                 
                 q.enqueue((new, now.c + 1))
             }
@@ -70,13 +70,6 @@ for _ in 0..<Int(readLine()!)! {
 }
 print(result)
 
-
 func makeNum(_ n: [Int]) -> Int {
-    var result = 0
-    for i in 0..<4 {
-        result += n[i] * 1000 / Int(pow(10, Double(i)))
-    }
-    
-    return result
+    return n[0] * 1000 + n[1] * 100 + n[2] * 10 + n[3]
 }
-
